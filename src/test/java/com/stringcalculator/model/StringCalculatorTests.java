@@ -1,11 +1,17 @@
 package com.stringcalculator.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
@@ -13,6 +19,16 @@ public class StringCalculatorTests {
 
 	@InjectMocks
 	StringCalculator stringCalculator;
+
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@AfterAll
+	public static void getTestCount() throws Exception {
+		StringCalculator.getCalledCount();
+	}
 
 	@Test
 	public void addTestForEmptyValues() throws Exception {
@@ -30,12 +46,12 @@ public class StringCalculatorTests {
 	}
 
 	@Test
-	public void addTestForNewLines() throws Exception {
+	public void addForNewLinesTest() throws Exception {
 		assertEquals(stringCalculator.add("1\n2,3\n1"), 7);
 	}
 
 	@Test
-	public void addTestNegative() throws Exception {
+	public void negativeNumTest() throws Exception {
 
 		Exception exception = assertThrows(RuntimeException.class, () -> {
 			stringCalculator.add("-6,5");
@@ -48,7 +64,7 @@ public class StringCalculatorTests {
 	}
 
 	@Test
-	public void addTestNegativeForMultiple() throws Exception {
+	public void negativeMultipleNumTest() throws Exception {
 
 		Exception exception = assertThrows(RuntimeException.class, () -> {
 			stringCalculator.add("-6,5,-8,9");
@@ -61,7 +77,8 @@ public class StringCalculatorTests {
 	}
 
 	@Test
-	public void addTestForDiffDelimiter() throws Exception {
+	public void diffDelimiterTest() throws Exception {
 		assertEquals(stringCalculator.add("//;\\n1;2"), 3);
 	}
+
 }

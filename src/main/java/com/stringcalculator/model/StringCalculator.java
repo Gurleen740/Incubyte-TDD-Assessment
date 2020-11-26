@@ -9,7 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StringCalculator {
 
-	public int add(String numbers) throws Exception {
+	public static int count = 0;
+
+	public int add(String numbers) throws RuntimeException {
+
+		count++;
 
 		int[] numbersArray;
 
@@ -42,4 +46,11 @@ public class StringCalculator {
 			return sumOfNumbers;
 		}
 	}
+
+	public static int getCalledCount() {
+
+		return count;
+
+	}
+
 }
