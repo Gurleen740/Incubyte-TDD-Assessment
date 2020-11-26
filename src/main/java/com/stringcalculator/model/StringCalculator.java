@@ -3,7 +3,9 @@ package com.stringcalculator.model;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,11 +24,12 @@ public class StringCalculator {
 			return 0;
 		}
 		Matcher m = Pattern.compile("(.*)\\\\n(.*)")
-				.matcher(numbers.replaceAll("[// \\[ \\] ]", "").replaceAll("[\\*]", ","));
+				.matcher(numbers.replaceAll("[// \\[ ]", "").replaceAll("[\\*]", ","));
 		if (m.find()) {
 			String delimiter = m.group(1);
 			String numberFromMatcher = m.group(2);
-			numbersArray = Arrays.stream(numberFromMatcher.split(delimiter)).mapToInt(Integer::parseInt).toArray();
+			String splittedDeli = Stream.of(delimiter.split("[ \\] ]")).collect(Collectors.joining("|"));
+			numbersArray = Arrays.stream(numberFromMatcher.split(splittedDeli)).mapToInt(Integer::parseInt).toArray();
 
 		} else {
 			numbersArray = Arrays.stream(numbers.split(",|\\n")).mapToInt(Integer::parseInt).toArray();
