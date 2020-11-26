@@ -81,4 +81,8 @@ public class StringCalculatorTests {
 		assertEquals(stringCalculator.add("//;\\n1;2"), 3);
 	}
 
+	@Test
+	public void numberBiggerThanThousandTest() throws Exception {
+		assertEquals(stringCalculator.add("2,1001"), 2);
+	}
 }

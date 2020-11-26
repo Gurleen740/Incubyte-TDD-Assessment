@@ -31,12 +31,16 @@ public class StringCalculator {
 			numbersArray = Arrays.stream(numbers.split(",|\\n")).mapToInt(Integer::parseInt).toArray();
 		}
 		String negNumbers = "";
+		int index = 0;
 
 		for (int num : numbersArray) {
 			if (num < 0) {
 				negNumbers = negNumbers.concat(String.valueOf(num));
-			}
+			} else if (num > 1000) {
+				numbersArray[index] = 0;
 
+			}
+			index++;
 		}
 
 		if (!StringUtils.isEmpty(negNumbers)) {
