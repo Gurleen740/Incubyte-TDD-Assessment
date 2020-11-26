@@ -97,4 +97,8 @@ public class StringCalculatorTests {
 		assertEquals(stringCalculator.add("//[*][%]\\n1*2%3"), 6);
 	}
 
+	@Test
+	public void multipleDeimiterWithLongLengthTest() throws Exception {
+		assertEquals(stringCalculator.add("//[**][%%]\\n1**2%%3"), 6);
+	}
 }
