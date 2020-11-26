@@ -21,7 +21,8 @@ public class StringCalculator {
 
 			return 0;
 		}
-		Matcher m = Pattern.compile("(.*)\\\\n(.*)").matcher(numbers.replaceAll("[//]", ""));
+		Matcher m = Pattern.compile("(.*)\\\\n(.*)")
+				.matcher(numbers.replaceAll("[// \\[ \\] ]", "").replaceAll("[\\*]", ","));
 		if (m.find()) {
 			String delimiter = m.group(1);
 			String numberFromMatcher = m.group(2);
