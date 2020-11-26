@@ -59,4 +59,9 @@ public class StringCalculatorTests {
 		assertTrue(actualMessage.contains(expectedMessage));
 
 	}
+
+	@Test
+	public void addTestForDiffDelimiter() throws Exception {
+		assertEquals(stringCalculator.add("//;\\n1;2"), 3);
+	}
 }
